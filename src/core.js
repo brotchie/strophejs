@@ -3417,10 +3417,6 @@ Strophe.Connection.prototype = {
     }
 };
 
-if (callback) {
-    callback(Strophe, $build, $msg, $iq, $pres);
-}
-
 /**
  * Constructor: Strophe.SASLMechanism
  * SASL auth mechanism abstraction.
@@ -3735,10 +3731,14 @@ Strophe.SASLMD5.prototype.onChallenge = function(connection, challenge, test_cno
 
 Strophe.Connection.prototype.mechanisms[Strophe.SASLMD5.prototype.name] = Strophe.SASLMD5;
 
-})(function () {
-    window.Strophe = arguments[0];
-    window.$build = arguments[1];
-    window.$msg = arguments[2];
-    window.$iq = arguments[3];
-    window.$pres = arguments[4];
+define('strophe', function(){
+  return {
+    Strophe: Strophe,
+    $build: $build,
+    $msg: $msg,
+    $iq: $iq,
+    $pres: $pres
+  };
 });
+
+})();
